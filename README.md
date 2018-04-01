@@ -1,4 +1,9 @@
-# NumAlgSolve [![Build Status](https://travis-ci.org/mtmoncur/RootFinding.svg?branch=master)](https://travis-ci.org/mtmoncur/RootFinding) [![codecov](https://codecov.io/gh/mtmoncur/RootFinding/branch/master/graphs/badge.svg)](https://codecov.io/gh/mtmoncur/RootFinding) [![Code Health](https://landscape.io/github/mtmoncur/RootFinding/master/landscape.svg?style=flat)](https://landscape.io/github/mtmoncur/RootFinding/master)
+# NumAlgSolve 
+[![Build Status](https://travis-ci.org/mtmoncur/RootFinding.svg?branch=master)](https://travis-ci.org/mtmoncur/RootFinding) 
+[![codecov](https://codecov.io/gh/mtmoncur/RootFinding/branch/master/graphs/badge.svg)](https://codecov.io/gh/mtmoncur/RootFinding) 
+[![Code Health](https://landscape.io/github/mtmoncur/RootFinding/master/landscape.svg)](https://landscape.io/github/mtmoncur/RootFinding/master)
+
+<!-- [![Code Health](https://landscape.io/github/landscapeio/dodgy/master/landscape.png)](https://landscape.io/github/landscapeio/dodgy/master) -->
 
 <!-- [![Latest Version](https://pypip.in/v/RootFinding/badge.png)](https://crate.io/packages/dodgy) -->
 
