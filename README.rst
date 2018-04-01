@@ -6,8 +6,8 @@ RootFinding
 .. image:: https://img.shields.io/pypi/v/RootFinding.svg
         :target: https://pypi.python.org/pypi/RootFinding
 
-.. image:: https://img.shields.io/travis/tylerjarvis/RootFinding.svg
-        :target: https://travis-ci.org/tylerjarvis/RootFinding
+.. image:: https://img.shields.io/travis/mtmoncur/RootFinding.svg
+        :target: https://travis-ci.org/mtmoncur/RootFinding
 
 .. image:: https://readthedocs.org/projects/RootFinding/badge/?version=latest
         :target: https://RootFinding.readthedocs.io/en/latest/?badge=latest
