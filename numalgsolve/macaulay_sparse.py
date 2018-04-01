@@ -5,7 +5,7 @@ from numpy.linalg import cond
 from numalgsolve.polynomial import Polynomial, MultiCheb, MultiPower, is_power
 from scipy.sparse import csr_matrix, vstack
 from numalgsolve.utils import Term, row_swap_matrix, clean_zeros_from_matrix, inverse_P, triangular_solve, divides, slice_top, mon_combos
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from collections import defaultdict
 import numalgsolve.utils as utils
 
@@ -35,8 +35,8 @@ def Macaulay(initial_poly_list, global_accuracy = 1.e-10):
 
     matrix, matrix_terms = create_matrix(poly_coeff_list)
 
-    plt.matshow(matrix)
-    plt.show()
+    #plt.matshow(matrix)
+    #plt.show()
 
     #rrqr_reduce2 and rrqr_reduce same pretty matched on stability, though I feel like 2 should be better.
     matrix = utils.rrqr_reduce2(matrix, global_accuracy = global_accuracy) # here

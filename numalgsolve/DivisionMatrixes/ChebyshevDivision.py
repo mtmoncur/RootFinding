@@ -3,7 +3,7 @@ from numalgsolve.utils import get_var_list, slice_top, row_swap_matrix, mon_comb
 from numalgsolve.TelenVanBarel import add_polys, rrqr_reduceTelenVanBarel, rrqr_reduceTelenVanBarel2
 from numalgsolve.root_finder import newton_polish
 from scipy.linalg import solve_triangular, eig, qr
-from matplotlib import pyplot as plt
+#from matplotlib import pyplot as plt
 
 def division_cheb(polys, divisor_var = 0, tol = 1.e-14):
     '''Calculates the common zeros of polynomials using a division matrix.

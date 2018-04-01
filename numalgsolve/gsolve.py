@@ -10,7 +10,7 @@ import numpy as np
 import math
 from scipy.linalg import lu, qr, solve_triangular
 from scipy.sparse import csc_matrix, vstack
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from collections import defaultdict
 import warnings
 from numalgsolve.utils import InstabilityWarning, slice_top
