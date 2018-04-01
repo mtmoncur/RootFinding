@@ -1,5 +1,7 @@
 # NumAlgSolve [![Build Status](https://travis-ci.org/mtmoncur/RootFinding.svg?branch=master)](https://travis-ci.org/mtmoncur/RootFinding) [![codecov](https://codecov.io/gh/mtmoncur/RootFinding/branch/master/graphs/badge.svg)](https://codecov.io/gh/mtmoncur/RootFinding) [![Code Health](https://landscape.io/github/mtmoncur/RootFinding/master/landscape.svg?style=flat)](https://landscape.io/github/mtmoncur/RootFinding/master)
 
+<!-- [![Latest Version](https://pypip.in/v/RootFinding/badge.png)](https://crate.io/packages/dodgy) -->
+
 NumAlgSolve is a Python module for numerical and algebraic rootfinding. For our mathematical methods and their comparisons with other rootfinders, refer to [this paper](paper).
 
 ### Requirements
