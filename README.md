@@ -1,5 +1,5 @@
 # NumAlgSolve 
-[![Build Status](https://travis-ci.org/mtmoncur/RootFinding.svg?branch=master)](https://travis-ci.org/mtmoncur/RootFinding) 
+[![Build Status](https://travis-ci.org/mtmoncur/RootFinding.svg?branch=master)](https://travis-ci.org/mtmoncur/RootFinding)
 [![codecov](https://codecov.io/gh/mtmoncur/RootFinding/branch/master/graphs/badge.svg)](https://codecov.io/gh/mtmoncur/RootFinding) 
 [![Code Health](https://landscape.io/github/mtmoncur/RootFinding/master/landscape.svg)](https://landscape.io/github/mtmoncur/RootFinding/master)
 
