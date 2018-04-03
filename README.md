@@ -1,7 +1,7 @@
 # NumAlgSolve
-[![Build Status](https://travis-ci.org/tylerjarvis/RootFinding.svg?branch=pypackage)](https://travis-ci.org/tylerjarvis/RootFinding)
-[![codecov](https://codecov.io/gh/mtmoncur/tylerjarvis/branch/pypackage/graphs/badge.svg)](https://codecov.io/gh/tylerjarvis/RootFinding)
-<!-- [![Code Health](https://landscape.io/github/tylerjarvis/RootFinding/pypackage/landscape.svg)](https://landscape.io/github/tylerjarvis/RootFinding/pypackage) -->
+[![Build Status](https://travis-ci.org/tylerjarvis/RootFinding.svg?branch=master)](https://travis-ci.org/tylerjarvis/RootFinding)
+[![codecov](https://codecov.io/gh/mtmoncur/tylerjarvis/branch/master/graphs/badge.svg)](https://codecov.io/gh/tylerjarvis/RootFinding)
+<!-- [![Code Health](https://landscape.io/github/tylerjarvis/RootFinding/master/landscape.svg)](https://landscape.io/github/tylerjarvis/RootFinding/master) -->
 [![PyPI version](https://badge.fury.io/py/RootFinding.svg)](https://badge.fury.io/py/RootFinding)
 
 NumAlgSolve is a Python module for numerical and algebraic rootfinding. For our mathematical methods and their comparisons with other rootfinders, refer to [this paper](paper).
@@ -16,7 +16,7 @@ NumAlgSolve is a Python module for numerical and algebraic rootfinding. For our 
 (We are currently working on getting a `pip` or `conda` for download)
 
 Rootfinding can now be installed locally by using 'pip install -e .' while inside the RootFinding folder.
-The package can then by imported using 'import numalgsolve'
+The package can then by imported using 'import numalgsolve'.
 
 ## Usage
 
