@@ -1,9 +1,9 @@
 # NumAlgSolve
+<<<<<<< HEAD
 [![Build Status](https://travis-ci.org/tylerjarvis/RootFinding.svg?branch=master)](https://travis-ci.org/tylerjarvis/RootFinding)
 [![codecov](https://codecov.io/gh/mtmoncur/tylerjarvis/branch/master/graphs/badge.svg)](https://codecov.io/gh/tylerjarvis/RootFinding)
-<!-- [![Code Health](https://landscape.io/github/tylerjarvis/RootFinding/master/landscape.svg)](https://landscape.io/github/tylerjarvis/RootFinding/master) -->
 [![PyPI version](https://badge.fury.io/py/RootFinding.svg)](https://badge.fury.io/py/RootFinding)
-
+<!-- [![Code Health](https://landscape.io/github/tylerjarvis/RootFinding/pypackage/landscape.svg)](https://landscape.io/github/tylerjarvis/RootFinding/pypackage) -->
 NumAlgSolve is a Python module for numerical and algebraic rootfinding. For our mathematical methods and their comparisons with other rootfinders, refer to [this paper](paper).
 
 ### Requirements
