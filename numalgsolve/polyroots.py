@@ -16,7 +16,9 @@ def solve(polys, method = 'mult'):
     polys : list of polynomial objects
         Polynomials to find the common roots of.
     method : string
-        The root finding method to be used. Can be either 'Mult' or 'Div'.
+        The root finding method to be used. Can be either 'mult' or 'div'.
+        'mult' uses the multiplication matrix
+        'div' uses the division matrix
     returns
     -------
     roots : numpy array
@@ -26,7 +28,8 @@ def solve(polys, method = 'mult'):
     # Determine polynomial type
     poly_type = is_power(polys, return_string = True)
     dim = polys[0].dim
-    
+
+    #one variable case
     if dim == 1:
         if len(polys) == 1:
             return oneD.solve(polys[0], method)
@@ -46,9 +49,12 @@ def solve(polys, method = 'mult'):
                 zeros = common
             return zeros
     else:
+        #many variable case
         if method == 'mult':
+            #use multiplication matrix
             return multiplication(polys)
         else:
+            #use division matrix
             if poly_type == 'MultiPower':
                 return division_power(polys)
             else:
@@ -56,7 +62,7 @@ def solve(polys, method = 'mult'):
 
 def multiplication(polys):
     '''
-    Finds the roots of the given list of multidimensional polynomials using a multiplication matrix. 
+    Finds the roots of the given list of multidimensional polynomials using a multiplication matrix.
 
     Parameters
     ----------
@@ -66,7 +72,7 @@ def multiplication(polys):
     -------
     roots : numpy array
         The common roots of the polynomials. Each row is a root.
-    '''    
+    '''
     poly_type = is_power(polys, return_string = True)
     dim = polys[0].dim
 
@@ -89,9 +95,9 @@ def multiplication(polys):
     # Get left eigenvectors
 
     vals,vecs = np.linalg.eig(m_f.T)
-    
+
     zeros_spot = var_dict[tuple(0 for i in range(dim))]
-        
+
     vecs = vecs[:,np.abs(vecs[zeros_spot]) > 1.e-10]
 
     roots = vecs[var_spots]/vecs[zeros_spot]
@@ -117,12 +123,12 @@ def TVBMultMatrix(polys, poly_type):
         Maps each variable to its position in the vector space basis
     '''
     basisDict, VB, degree = TelenVanBarel(polys)
-        
+
     dim = max(f.dim for f in polys)
 
     # Get random polynomial f
     f = _random_poly(poly_type, dim)[0]
-    
+
     #Dictionary of terms in the vector basis their spots in the matrix.
     VBdict = {}
     spot = 0
