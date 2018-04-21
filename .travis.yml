@@ -2,7 +2,6 @@
 
 language: python
 python:
-  - 3.5
   - 3.6
 
 # Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
@@ -17,13 +16,13 @@ after_success:
 # create the Github repo and add it to Travis, run the
 # following command to finish PyPI deployment setup:
 # $ travis encrypt --add deploy.password
-#deploy:
-#  provider: pypi
-#  distributions: sdist bdist_wheel
-#  user: tylerjarvis
-#  password:
-#    secure: PLEASE_REPLACE_ME
-#  on:
-#    tags: true
-#    repo: tylerjarvis/RootFinding
-#    python: 3.6
+deploy:
+  provider: pypi
+  distributions: sdist bdist_wheel
+  user: mtmoncur
+  password: 
+    secure: GelzfqyzpfPxazlUpG10RQwHsq2frIqyZ1D3Il8LWySqQe2VThL8VXh1ElLTdjVJt9ahkm8o8pc250xal7rCjseNfctXCRbUq7LX2aa3+DQ8nCOovkEYto6KjBWjmhaKqPVScy+e68F5cSC1FNWSTDcU6PnxJYbaXMbbpxPCTPqBIz8PxcWEz6u2hheIgZNg2uZyuH6ninssuhEUKADy7ks5oqTOT5UXWaGuKgMGxOC4z6pv5X+MKaGzavqoxop8R2suyEn1uCxuJlMKWrkS5QWfY3CSF7O9nXUXQxdrg1P6c62tM0of7ZINlN662OFuwisT/KG9FuBs7dqsskOQBibWguOwUK3hpe4jxjCT6x5n+E/vRM33U9c/84l9WwjS4x0iteHI+56W2+iid6g1RQkP9YoW8jI2s2yr7A0Taqw3h2vNhf32IbhE0MqOavTclCaV9o7k2yFPJ2/C+a72INI5aQ2yC33IAhWhd55FmDq/4CLdUU4U+BI0ra3NJ/2A3+pgtlvYF9kJavFrqxe7GTGgz4nzTIoN3DswfSu2QIA5jwXguvrDQKKYAYcWxw+RJuyibGOzChUUFVhwDK894T+7kMgLQOJQG/K8oG6WIbVc/rWwxuUPPwtDg/4HjeuC/X4RAl9dQtisqu1g7nRW5EjmRNzJ/VHrFns/VSDkyZI=
+  on:
+    tags: true
+    repo: mtmoncur/RootFinding
+    python: 3.6
