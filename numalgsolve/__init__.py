@@ -1,3 +1,8 @@
-# Do not delete this file. It tells python that groebner is a module you can import from.
+'''Python package for fast, stable root finding.
+
+'''
+
 from numalgsolve.polyroots import solve
-__all__ = ['solve']
+from numalgsolve.subdivision import solve as subdivide_solve
+
+__all__ = ['solve', 'subdivide_solve']

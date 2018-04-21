@@ -1,3 +1,9 @@
+"""
+Polyroots provides a solve function that finds roots of a set of polynomials,
+which be either the standard power basis, or the chebyshev basis.
+
+"""
+
 import numpy as np
 import itertools
 from numalgsolve import OneDimension as oneD
