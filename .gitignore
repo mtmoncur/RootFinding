@@ -1,6 +1,6 @@
 *.pyc
 *.swp
-*.py~ 
+*.py~
 *.ipynb
 pytest/htmlcov
 pytest/.cache
@@ -11,5 +11,4 @@ __pycache__/
 .ipynb_checkpoints/
 .eggs/
 *.egg-info/
-.DS_Store
-
+*.DS_Store
