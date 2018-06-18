@@ -78,8 +78,8 @@ def test_subdivision_solve_no_transform():
     correctZeros([A,B,C,D], a, b)
 
     #Case 4 - Two MultiPower 2D, one degree 20 and one degree 28
-    #choose a seed that has a zero like 0,1,2,3,4,5,6,7,8,9,10
-    np.random.seed(0)
+    #choose a seed that has a zero like
+    np.random.seed(2)
     a = -np.ones(2);b = np.ones(2)
     A = getPoly(20,2,True)
     B = getPoly(28,2,True)

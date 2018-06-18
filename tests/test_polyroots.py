@@ -1,11 +1,12 @@
 import numpy as np
 from numalgsolve.polynomial import Polynomial, MultiCheb, MultiPower
-from numalgsolve.TVBCore import find_degree, mon_combos
+from numalgsolve.TVBCore import find_degree, mon_combos, rrqr_reduceTelenVanBarel, rrqr_reduceTelenVanBarel2
 from numalgsolve import polyroots as pr
 from numalgsolve.utils import InstabilityWarning, arrays
 from numalgsolve.Multiplication import create_matrix
 from itertools import product
 import warnings
+import unittest
 
 def test_paper_example():
 
@@ -223,6 +224,7 @@ def test_div_cheb_roots():
     C = getPoly(5,3,False)
     correctZeros([A,B,C], 'div')
 
+@unittest.skip("Work in progress")
 def test_tvb_qr():
     """Tests TVB-style qr reduction. Specifically, makes sure that QR reduction
     doesn't accidentally eliminate information in some rows, i.e. if the bottom
