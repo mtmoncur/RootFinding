@@ -3,6 +3,21 @@ from scipy.linalg import eig, norm, eigvals
 from numpy import linalg as la
 from numalgsolve.polynomial import MultiCheb, MultiPower
 
+
+def ev_cond(A):
+    pass
+    # import scipy.linalg as la
+    # n = A.shape[0]
+    # conds = np.zeros(n)
+    # T,Z = la.schur(A,output='complex')
+    # for i in range(n):
+    #     eig = T[i,i]
+    #     B = np.delete(T,i,axis=0)
+    #     B = np.delete(B,i,axis=1)
+    #     s = la.svd(B-eig*np.eye(n-1))[1]
+    #     conds[i] = 1/(min(s)+1e-16)
+    # return conds
+
 from matplotlib import pyplot as plt
 def solve(poly, method = 'mult', eigvals=True):
     """Finds the zeros of a 1-D polynomial.
@@ -57,7 +72,7 @@ def multPower(coeffs, eigvals=True):
     bot = matrix.reshape(-1)[n::n+1]
     bot[...] = 1#*coeffs[-1]
     matrix[:, -1] -= coeffs[:-1]/coeffs[-1]
-
+    print("mult power condition: {}".format(ev_cond(matrix)))
     if eigvals:
         zeros = la.eigvals(matrix)
         return zeros#/coeffs[-1]
@@ -95,10 +110,10 @@ def multnPower(coeffs, mult_n, eigvals=True):
         matrix = np.roll(matrix, 1, axis=0)
         matrix[:,-i:] += remainder*xn
 
-    plt.imshow(np.abs(matrix))
-    plt.title(f"{mult_n}")
-    plt.colorbar()
-    plt.show()
+    # plt.imshow(np.abs(matrix))
+    # plt.title(f"{mult_n}")
+    # plt.colorbar()
+    # plt.show()
 
 
     if eigvals:
@@ -134,13 +149,14 @@ def multPowerR(coeffs, eigvals=True):
     bot = matrix.reshape(-1)[n::n+1]
     bot[...] = 1
     matrix[:, -1] -= coeffs[:-1]/coeffs[-1]
+    print("multR power condition: {}".format(ev_cond(matrix)))
     if eigvals:
         zeros = la.eigvals(np.rot90(matrix,2))
         return zeros
     else:
         from scipy.linalg import eig
         vals,vecs= eig(np.rot90(matrix,2), left=True, right=False)
-        return np.conjugate(vecs[0,:]/vecs[1,:])
+        return np.conjugate(vecs[-2,:]/vecs[-1,:])
 
 def divPower(coeffs, eigvals=True):
     """Finds the zeros of a 1-D power polynomial using a division matrix.
@@ -161,6 +177,7 @@ def divPower(coeffs, eigvals=True):
     bot[...] = 1
     matrix[:, 0] -= coeffs[1:]/coeffs[0]
     # print(matrix)
+    print("div power condition: {}".format(ev_cond(matrix)))
     if eigvals:
         zeros = 1/la.eigvals(matrix)
         return zeros
@@ -197,6 +214,7 @@ def div2Power(coeffs, eigvals=True):
     # plt.imshow(matrix.real)
     # plt.colorbar()
     # plt.show()
+    print("div2 power condition: {}".format(ev_cond(matrix)))
     if eigvals:
         zeros = 1/la.eigvals(matrix)
         return zeros/coeffs[0]
@@ -245,6 +263,7 @@ def divnPower(coeffs, div_n, eigvals=True):
     # plt.imshow(matrix.real)
     # plt.colorbar()
     # plt.show()
+    print("div{} power condition: {}".format(div_n, ev_cond(matrix)))
     if eigvals:
         zeros = la.eigvals(matrix)**(-1/div_n)
         return zeros
@@ -281,11 +300,12 @@ def plusPower(coeffs, one_n, eigvals=True):
 
     matrix += dMatrix
 
-    from matplotlib import pyplot as plt
-    logplot(np.abs(matrix))
+    # from matplotlib import pyplot as plt
+    # logplot(np.abs(matrix))
 
     # zeros = x + 1/x
     # x^2 - zeros*z + 1 = 0
+    print("mult power condition: {}".format(ev_cond(matrix)))
     if eigvals:
         zeros = la.eigvals(matrix)
         zeros = (zeros - np.sqrt(zeros**2 - 4))/(2)
@@ -351,11 +371,8 @@ def multChebR(coeffs, eigvals=True):
         zeros = la.eigvals(np.rot90(mMatrix,2))
         return zeros
     else:
-        vals,vecs = eig(np.rot90(mMatrix,2))
-        plt.imshow(vecs.real)
-        plt.colorbar()
-        plt.show()
-        return vecs[0,:]/vecs[1,:]
+        vals,vecs = eig(np.rot90(mMatrix,2), left=True, right=False)
+        return np.conjugate(vecs[-2,:]/vecs[-1,:])
 
 
 def getXinv(coeff):

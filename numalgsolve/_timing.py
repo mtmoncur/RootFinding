@@ -1,4 +1,5 @@
 import numpy as np
+from numalgsolve.OneDimension import multPowerR, multChebR, plusPower
 from numalgsolve.polynomial import MultiCheb, MultiPower, getPoly
 from numalgsolve.polyroots import solve as prsolve
 from numalgsolve.subdivision import solve as subsolve
@@ -8,17 +9,26 @@ import cProfile, pstats, io
 import time
 import warnings
 
+def _multPowerR(poly):
+    multPowerR(poly[0].coeff)
+
+def _multChebR(poly):
+    multChebR(poly[0].coeff)
+
+def _plusPower(poly):
+    plusPower(poly[0].coeff, 1)
+
 def _div(poly):
-        prsolve(poly, 'div')
+    prsolve(poly, 'div')
 
 def _mult(poly):
-        prsolve(poly, 'mult')
+    prsolve(poly, 'mult')
 
 def _nproots(poly):
-        np.roots(poly[0].coeff)
+    np.roots(poly[0].coeff)
 
 def _npcheb(poly):
-        np.polynomial.chebyshev.chebroots(poly[0].coeff)
+    np.polynomial.chebyshev.chebroots(poly[0].coeff)
 
 # One Dimension
 def timer(solver, dim, power):
@@ -90,6 +100,18 @@ def run_timer(args):
     print('Finished trials for multiplication chebyshev')
 
     if args.dim == 1:
+        degrees, times = timer(_multPowerR, args.dim, power=True)
+        results['mult power R'] = times
+        print('Finished trials for rotated multiplication power')
+
+        degrees, times = timer(_multChebR, args.dim, power=True)
+        results['mult cheb R'] = times
+        print('Finished trials for rotated multiplication chebyshev')
+
+        degrees, times = timer(_plusPower, args.dim, power=True)
+        results['plus power'] = times
+        print('Finished trials for plus power')
+
         degrees, times = timer(_nproots, args.dim, power=True)
         results['numpy power'] = times
         print('Finished trials for numpy power')
@@ -108,9 +130,12 @@ def create_graph(results, args):
     ymax = max(ymax, 0.1)
     plt.figure(figsize=(11,5))
     plt.subplot(121)
-    if args.dim==1 :plt.plot(degrees, results['numpy power'], label='numpy')
     plt.plot(degrees,  results['mult power'], label='multiplication')
     plt.plot(degrees,  results['div power'], label='division')
+    if args.dim==1 :
+        plt.plot(degrees, results['numpy power'], label='numpy')
+        plt.plot(degrees, results['mult power R'], label='multR')
+        plt.plot(degrees, results['plus power'], label='plus')
     #plt.plot(degrees, dt_times, label='division.T')
     #plt.plot(degrees, mt_times, label='multiplication.T')
     plt.xlim(0,xmax)
@@ -124,9 +149,12 @@ def create_graph(results, args):
     plt.title("Power Basis Solve Times", fontsize=16)
 
     ax = plt.subplot(122)
-    if args.dim==1 :plt.plot(degrees, results['numpy cheb'], label='numpy')
     plt.plot(degrees, results['mult cheb'], label='multiplication')
     plt.plot(degrees, results['div cheb'], label='division')
+    if args.dim==1:
+        plt.plot(degrees, results['numpy cheb'], label='numpy')
+        plt.plot(degrees, results['mult cheb R'], label='multR')
+
     #plt.plot(degrees, dchebt_times, label='division.T')
     #plt.plot(degrees, mchebt_times, label='multiplication.T')
     plt.xlim(0,xmax)
