@@ -5,7 +5,7 @@ from numalgsolve.polynomial import Polynomial, MultiCheb, MultiPower
 from numalgsolve.utils import row_swap_matrix, TVBError, slice_top, mon_combos, \
                               num_mons_full, memoized_all_permutations, mons_ordered, \
                               all_permutations_cheb
-
+from matplotlib import pyplot as plt
 def add_polys(degree, poly, poly_coeff_list):
     """Adds polynomials to a Macaulay Matrix.
 
@@ -53,6 +53,15 @@ def find_degree(poly_list):
     '''
     return sum(poly.degree for poly in poly_list) - len(poly_list) + 1
 
+def help_plot(i,matrix, cuts, title):
+    plt.subplot(3,1,i)
+    plt.imshow(np.log(np.abs(matrix)+1))
+    # plt.colorbar()
+    plt.plot([cuts[0]-0.5, cuts[0]-0.5], [-0.5,matrix.shape[0]-.5], 'r', lw=2)
+    plt.plot([cuts[1]-0.5, cuts[1]-0.5], [-0.5,matrix.shape[0]-.5], 'r', lw=2)
+    plt.plot([-0.5, matrix.shape[1]-.5], [cuts[0]-0.5, cuts[0]-0.5], 'r', lw=2)
+    plt.title(title)
+
 def rrqr_reduceTelenVanBarel(matrix, matrix_terms, cuts, number_of_roots, accuracy = 1.e-10):
     ''' Reduces a Telen Van Barel Macaulay matrix.
 
@@ -83,6 +92,8 @@ def rrqr_reduceTelenVanBarel(matrix, matrix_terms, cuts, number_of_roots, accura
     '''
     #print("Starting matrix.shape:\n", matrix.shape)
     #RRQR reduces A and D without pivoting sticking the result in it's place.
+    plt.figure(figsize=(18,18))
+    help_plot(1, matrix, cuts, "Initial")
     Q1,matrix[:,:cuts[0]] = qr(matrix[:,:cuts[0]])
 
     #Looks like 0 but not, add to the rank.
@@ -94,6 +105,7 @@ def rrqr_reduceTelenVanBarel(matrix, matrix_terms, cuts, number_of_roots, accura
     #Multiplying the rest of the matrix by Q.T
     matrix[:,cuts[0]:] = Q1.T@matrix[:,cuts[0]:]
     Q1 = 0 #Get rid of Q1 for memory purposes.
+    help_plot(2, matrix, cuts, "After QR(A)")
 
     #RRQR reduces E sticking the result in it's place.
     Q,matrix[cuts[0]:,cuts[0]:cuts[1]],P = qr(matrix[cuts[0]:,cuts[0]:cuts[1]], pivoting = True)
@@ -112,6 +124,10 @@ def rrqr_reduceTelenVanBarel(matrix, matrix_terms, cuts, number_of_roots, accura
     #eliminates rows we don't care about-- those at the bottom of the matrix
     #since the top corner is a square identity matrix, useful_rows + number_of_roots is the width of the Macaulay matrix
     matrix = row_swap_matrix(matrix)
+    help_plot(3, matrix, cuts, "After QR(E) and row_swap")
+
+    plt.tight_layout()
+    plt.show()
     for row in matrix[::-1]:
         if np.allclose(row, 0):
             matrix = matrix[:-1]
@@ -156,9 +172,12 @@ def rrqr_reduceTelenVanBarel2(matrix, matrix_terms, cuts, number_of_roots, accur
     '''
     #print("Starting matrix.shape:\n", matrix.shape)
     #RRQR reduces A and D without pivoting sticking the result in it's place.
+    plt.figure(figsize=(18,18))
+    help_plot(1, matrix, cuts, "Initial")
     C1,matrix[:cuts[0],:cuts[0]] = qr_multiply(matrix[:,:cuts[0]], matrix[:,cuts[0]:].T, mode = 'right')
     matrix[:cuts[0],cuts[0]:] = C1.T
     C1 = 0
+    help_plot(2, matrix, cuts, "After QR(A)")
 
     #if abs(matrix[:,:cuts[0]].diagonal()[-1]) < accuracy:
     #    raise TVBError("HIGHEST NOT FULL RANK")
@@ -179,7 +198,9 @@ def rrqr_reduceTelenVanBarel2(matrix, matrix_terms, cuts, number_of_roots, accur
     matrix[:cuts[0],cuts[0]:cuts[1]] = matrix[:cuts[0],cuts[0]:cuts[1]][:,P]
     matrix_terms[cuts[0]:cuts[1]] = matrix_terms[cuts[0]:cuts[1]][P]
     P = 0
-
+    help_plot(3, matrix, cuts, "After triangle solve and QR(E)")
+    plt.tight_layout()
+    plt.show()
     # Check if there are no solutions
     #rank = np.sum(np.abs(matrix.diagonal())>accuracy)
 

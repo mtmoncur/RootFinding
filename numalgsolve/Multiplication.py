@@ -82,7 +82,7 @@ def TVBMultMatrix(polys, poly_type, number_of_roots):
         Maps each variable to its position in the vector space basis
     '''
     basisDict, VB, degree = TelenVanBarel(polys, number_of_roots)
-
+    print(f'VB: {VB.shape}')
     dim = max(f.dim for f in polys)
 
     # Get random polynomial f
@@ -151,10 +151,13 @@ def TelenVanBarel(initial_poly_list, max_number_of_roots, accuracy = 1.e-10):
     """This is the second construction option, it uses the fancy triangle method that is faster but less stable."""
     #for deg in reversed(range(min([poly.degree for poly in initial_poly_list]), degree+1)):
     #    poly_coeff_list += deg_d_polys(initial_poly_list, deg, dim)
-
+    print(f'initial_poly_list: {len(initial_poly_list)}')
+    print(f'poly_coeff_list: {len(poly_coeff_list)}')
     #Creates the matrix for either of the above two methods. Comment out if using the third method.
     matrix, matrix_terms, cuts = create_matrix(poly_coeff_list, degree, dim)
-
+    print(f'matrix: {matrix.shape}')
+    print(f'matrix_terms: {matrix_terms.shape}')
+    print(f'cuts: {cuts}')
     """This is the thrid matrix construction option, it uses the permutation arrays."""
     #if power:
     #    matrix, matrix_terms, cuts = createMatrixFast(initial_poly_list, degree, dim)
@@ -166,12 +169,14 @@ def TelenVanBarel(initial_poly_list, max_number_of_roots, accuracy = 1.e-10):
         matrix, matrix_terms = rrqr_reduceTelenVanBarel2(matrix, matrix_terms, cuts, max_number_of_roots, accuracy = accuracy)
     else:
         matrix, matrix_terms = rrqr_reduceTelenVanBarel(matrix, matrix_terms, cuts, max_number_of_roots, accuracy = accuracy)
-
+    print(f'matrix after rrqr: {matrix.shape}')
+    print(f'matrix_terms after rrqr: {matrix_terms.shape}')
     #Make there are enough rows in the reduced TVB matrix, i.e. didn't loose a row
     assert matrix.shape[0] >= matrix.shape[1] - max_number_of_roots
 
     #matrix, matrix_terms = rrqr_reduceTelenVanBarelFullRank(matrix, matrix_terms, cuts, number_of_roots, accuracy = accuracy)
     height = matrix.shape[0]
+    print(f'height: {height}')
     matrix[:,height:] = solve_triangular(matrix[:,:height],matrix[:,height:])
     matrix[:,:height] = np.eye(height)
     #return np.vstack((matrix[:,height:].T,np.eye(height))), matrix_terms
