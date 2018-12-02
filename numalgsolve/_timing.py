@@ -3,7 +3,7 @@ from numalgsolve.OneDimension import multPowerR, multChebR
 from numalgsolve.polynomial import MultiCheb, MultiPower, getPoly
 from numalgsolve.polyroots import solve as prsolve
 from numalgsolve.subdivision import solve as subsolve
-from numalgsolve.TVBMethod import solve as TVBsolve
+# from numalgsolve.TVBMethod import solve as TVBsolve
 import matplotlib.pyplot as plt
 import argparse
 import cProfile, pstats, io
@@ -30,8 +30,8 @@ def _nproots(poly):
 def _npcheb(poly):
     np.polynomial.chebyshev.chebroots(poly[0].coeff)
 
-def _TVB(poly):
-    TVBsolve(poly)
+# def _TVB(poly):
+#     TVBsolve(poly)
 
 def bertini(polys):
     def mononmial_from_exp(exponents, var_chars):
@@ -113,7 +113,7 @@ def timer(solver, dim, power):
     #     max_degree = {1:60,2:6,3:5,4:4,5:4}[dim]
     #     interval = {1:10,2:1,3:1,4:1,5:1}[dim]
     # degrees = list(range(min_degree,max_degree+1,interval))
-    degrees_dct = {2: [7,13,19,25,31,37,43,49],#,55,61],
+    degrees_dct = {2: [7,13,19,25,31],#,37,43,49],#,55,61],
                    3: [3,5,7,9,11,13],
                    4: [2,3,4],
                    5: [2,3]
@@ -159,9 +159,9 @@ def run_timer(args):
     results['Multiplication power'] = times
     print('Finished trials for multiplication power')
 
-    degrees, times = timer(_TVB, args.dim, power=True)
-    results['TVB power'] = times
-    print('Finished trials for TVB power')
+    # degrees, times = timer(_TVB, args.dim, power=True)
+    # results['TVB power'] = times
+    # print('Finished trials for TVB power')
 
     if args.bertini:
         degrees, times = timer(bertini, args.dim, power=True)
@@ -176,9 +176,9 @@ def run_timer(args):
     results['mult cheb'] = times
     print('Finished trials for multiplication chebyshev')
 
-    degrees, times = timer(_TVB, args.dim, power=False)
-    results['TVB cheb'] = times
-    print('Finished trials for TVB cheb')
+    # degrees, times = timer(_TVB, args.dim, power=False)
+    # results['TVB cheb'] = times
+    # print('Finished trials for TVB cheb')
 
     if args.dim == 1:
         degrees, times = timer(_multPowerR, args.dim, power=True)
